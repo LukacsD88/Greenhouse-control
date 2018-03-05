@@ -7,6 +7,7 @@
 **/
 
 #include "DHT.h"
+//hehe
 #include <SPI.h>  
 #include "RF24.h"
 
@@ -89,6 +90,8 @@ digitalWrite(led_pin, HIGH); //Flash LED for transmitting
 
 readSensor1();
 readSensor2();
+
+
 float Ldrluxval = Ldrcalc();
 data_sensor1.lightsensor = Ldrluxval;
 
@@ -134,6 +137,8 @@ void readSensor1()
   
     data_sensor1.humidity    = dht_sensor1.readHumidity();
     data_sensor1.temperature = dht_sensor1.readTemperature();
+ if (isnan(data_sensor1.humidity) || isnan(data_sensor1.temperature)) {
+    Serial.println("Failed to read from DHT sensor!");
     
   }
 
@@ -144,6 +149,9 @@ void readSensor2()
   
   data_sensor2.humidity    = dht_sensor2.readHumidity();
   data_sensor2.temperature = dht_sensor2.readTemperature();
+  
+   if (isnan(data_sensor2.humidity) || isnan(data_sensor2.temperature)) {
+    Serial.println("Failed to read from DHT sensor!");
   
   
   }
